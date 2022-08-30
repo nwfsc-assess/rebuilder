@@ -21,9 +21,10 @@ There are a range of exisiting rebuilding plans documents that can be examined t
 
 1. Updated rebuilding analysis for existing rebuilding plan: 
 	a) [yelloweye rockfish](https://www.pcouncil.org/documents/2017/01/rebuilding-analysis-for-yelloweye-rockfish-sebastes-ruberrimus-based-on-the-2017-stock-assessment.pdf/)
+	b) [petrale sole 2011](https://www.pcouncil.org/documents/2009/11/2009-petrale-sole-rebuilding-analysis-november-2-2009.pdf/)
 2. New rebuilding analysis: 
 	a) [quillback rockfish](https://www.pcouncil.org/documents/2022/01/draft-rebuilding-analysis-for-quillback-rockfish-sebastes-maliger-in-u-s-waters-off-the-coast-of-california-based-on-the-2021-stock-assessment-incorporating-november-2021-council-meeting-requests.pdf/)
-	b) [petrale sole](https://www.pcouncil.org/documents/2011/11/2011-petrale-sole-rebuilding-analysis-november-23-2011.pdf/)
+	b) [petrale sole 2009](https://www.pcouncil.org/documents/2011/11/2011-petrale-sole-rebuilding-analysis-november-23-2011.pdf/)
 
 ## Reporting problems
 Please report any issues with this package by posting a new github issue at https://github.com/nwfsc-assess/rebuilder/issues.
