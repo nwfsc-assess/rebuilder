@@ -1,0 +1,25 @@
+Package: rebuilder
+Type: Package
+Title: rebuilder: Conducting rebuilding projections for species managed by the Pacific Fishery Managment Council
+Version: 1.0
+Authors@R:
+    c(person(given = c("Chantel", "R."),
+             family = "Wetzel",
+             role = c("aut", "cre"),
+             email = "chantel.wetzel@noaa.gov"),
+      person(given = c("Ian", "G."),
+             family = "Taylor",
+             role = c("aut")))
+Description: Helper functions and information for conducting rebuilding analyses for West Coast species.
+License: GPL (>=3)
+Suggests:
+Imports:
+    reshape2,
+    ggplot2 (>= 3.0.0)
+Depends:
+    R (>= 4.0)
+Encoding: UTF-8
+VignetteBuilder: knitr
+RoxygenNote: 7.2.1
+LazyData: true
+Roxygen: list(markdown = TRUE)
