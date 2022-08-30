@@ -15,5 +15,15 @@ The current version of the rebuilder executable is 3.12j modified in December 20
 
 The Scientific and Statistical Committee of the PFMC provides guidance on how rebuilding projections should be conducted and what needs to be included in the rebulding plan. A draft version of the rebuilding Terms of Reference can be found online [here](https://www.pcouncil.org/documents/2022/02/e-8-attachment-5-draft-terms-of-reference-for-the-groundfish-rebuilding-analysis-for-2023-2024.pdf/).
 
+## Existing rebuild plans for West Coast species
+
+There are a range of exisiting rebuilding plans documents that can be examined to understand the needed analysis and presentation of results for West Coast species:
+
+1. Updated rebuilding analysis for existing rebuilding plan: 
+	a) [yelloweye rockfish](https://www.pcouncil.org/documents/2017/01/rebuilding-analysis-for-yelloweye-rockfish-sebastes-ruberrimus-based-on-the-2017-stock-assessment.pdf/)
+2. New rebuilding analysis: 
+	a) [quillback rockfish](https://www.pcouncil.org/documents/2022/01/draft-rebuilding-analysis-for-quillback-rockfish-sebastes-maliger-in-u-s-waters-off-the-coast-of-california-based-on-the-2021-stock-assessment-incorporating-november-2021-council-meeting-requests.pdf/)
+	b) [petrale sole](https://www.pcouncil.org/documents/2011/11/2011-petrale-sole-rebuilding-analysis-november-23-2011.pdf/)
+
 ## Reporting problems
 Please report any issues with this package by posting a new github issue at https://github.com/nwfsc-assess/rebuilder/issues.
