@@ -1,0 +1,20 @@
+Package: rebuilder
+Type: Package
+Title: Examples and helper functions for conducting rebuilding analysis for West Coast species.
+Version: 1.0
+Author: Chantel Wetzel
+Maintainer: Chantel Wetzel <chantel.wetzel@noaa.gov>
+Description:  Examples and helper functions for conducting rebuilding analysis for West Coast species.
+URL: https://github.com/nwfsc-assess/rebuilder
+BugReports: https://github.com/nwfsc-assess/rebuilder/issues
+LazyData: true
+Depends:
+	R (>= 3.5)
+Imports:
+  ggplot2,
+	reshape2
+Suggests:
+License: GPL-3
+RoxygenNote: 7.1.1
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
