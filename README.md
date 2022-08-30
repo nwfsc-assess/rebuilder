@@ -1,4 +1,4 @@
-# rebuilder
+# rebuilder: Conducting rebuilding projections for species managed by the Pacific Fishery Managment Council
 
 U.S. West Coast species (or stocks) where the spawning biomass is estimated to be below the Minimum Stock Size Threshold or are currently managed under a rebuilding plan need to provide quantitative population projections to determine the probability of rebuilding by specific years under alternative harvest strategies. These rebuilding projections are conducted using the "rebuilder" (aka "The Puntalizer") program, created by Dr. Andre Punt, for species management by the Pacific Fishery Management Council (PFMC). 
 
@@ -14,3 +14,6 @@ The current version of the rebuilder executable is 3.12j modified in December 20
 ## Terms of reference for West Coast rebuilding plans
 
 The Scientific and Statistical Committee of the PFMC provides guidance on how rebuilding projections should be conducted and what needs to be included in the rebulding plan. A draft version of the rebuilding Terms of Reference can be found online [here](https://www.pcouncil.org/documents/2022/02/e-8-attachment-5-draft-terms-of-reference-for-the-groundfish-rebuilding-analysis-for-2023-2024.pdf/).
+
+## Reporting problems
+Please report any issues with this package by posting a new github issue at https://github.com/nwfsc-assess/rebuilder/issues.
