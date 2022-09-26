@@ -25,6 +25,10 @@ There are a range of exisiting rebuilding plans documents that can be examined t
 2. New rebuilding analysis: 
 	a) [quillback rockfish](https://www.pcouncil.org/documents/2022/01/draft-rebuilding-analysis-for-quillback-rockfish-sebastes-maliger-in-u-s-waters-off-the-coast-of-california-based-on-the-2021-stock-assessment-incorporating-november-2021-council-meeting-requests.pdf/)
 	b) [petrale sole 2009](https://www.pcouncil.org/documents/2011/11/2011-petrale-sole-rebuilding-analysis-november-23-2011.pdf/)
+	
+## Scientific publications
+
+[Wetzel and Punt (2016)](https://academic.oup.com/icesjms/article/73/9/2190/2198555) conducted simulation work to evaluate the effectiveness of alternative rebuilding strategies across various West Coast life history types. The Methods sections contains a description of the generall internal calculations conducted within the rebuilder software. 
 
 ## Reporting problems
 Please report any issues with this package by posting a new github issue at https://github.com/nwfsc-assess/rebuilder/issues.
