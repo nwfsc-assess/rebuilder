@@ -28,7 +28,7 @@ There are a range of exisiting rebuilding plans documents that can be examined t
 	
 ## Scientific publications
 
-[Wetzel and Punt (2016)](https://academic.oup.com/icesjms/article/73/9/2190/2198555) conducted simulation work to evaluate the effectiveness of alternative rebuilding strategies across various West Coast life history types. The Methods sections contains a description of the generall internal calculations conducted within the rebuilder software. 
+[Wetzel and Punt (2016)](https://academic.oup.com/icesjms/article/73/9/2190/2198555) conducted simulation work to evaluate the effectiveness of alternative rebuilding strategies across various West Coast life history types. The Methods sections contains a description of the general internal calculations conducted within the rebuilder software. 
 
 ## Reporting problems
 Please report any issues with this package by posting a new github issue at https://github.com/nwfsc-assess/rebuilder/issues.
