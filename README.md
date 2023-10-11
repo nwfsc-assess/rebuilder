@@ -6,25 +6,26 @@ The rebuilder is designed to work with the rebuild.sso file created by Stock Syn
 
 ## What tools are available?
 
-This package includes several resources for conducting and analyzing projections conducted by the rebuilder. A user manual that aligns with the latest version of the executable is available in the manual folder and the corresponding executable is available in the inst folder. There are helper functions in the R folder for processing rebuilder output and to create visualization.
+This package includes several resources for conducting and analyzing projections conducted by the rebuilder. A user manual that aligns with the latest version of the executable is available in the manual folder and the corresponding executable is available in the inst folder. User instructions are available via a [google doc](https://docs.google.com/document/d/17hH1CEdombkF33Nw-_BAZLIlSfHWWgfkBSSdFRNTX_s/edit), but access is limited to NOAA scientists so a downloaded copy (updated Oct. 5, 2023) is provided in the manual folder. There are helper functions in the R folder for processing rebuilder output and to create visualization.
 
 ## Version
 The current version of the rebuilder executable is 3.12j modified in December 2021. Older versions of the rebuilder executable are available upon request (chantel.wetzel@noaa.gov). 
 
 ## Terms of reference for West Coast rebuilding plans
 
-The Scientific and Statistical Committee of the PFMC provides guidance on how rebuilding projections should be conducted and what needs to be included in the rebulding plan. A draft version of the rebuilding Terms of Reference can be found online [here](https://www.pcouncil.org/documents/2022/02/e-8-attachment-5-draft-terms-of-reference-for-the-groundfish-rebuilding-analysis-for-2023-2024.pdf/).
+The Scientific and Statistical Committee of the PFMC provides guidance on how rebuilding projections should be conducted and what needs to be included in the rebulding plan. The 2023-2024 rebuilding Terms of Reference can be found online [here](https://www.pcouncil.org/documents/2022/06/terms-of-reference-for-the-groundfish-rebuilding-analysis-for-2023-2024.pdf/).
 
 ## Existing rebuild plans for West Coast species
 
 There are a range of exisiting rebuilding plans documents that can be examined to understand the needed analysis and presentation of results for West Coast species:
 
 1. Updated rebuilding analysis for existing rebuilding plan: 
-	a) [yelloweye rockfish](https://www.pcouncil.org/documents/2017/01/rebuilding-analysis-for-yelloweye-rockfish-sebastes-ruberrimus-based-on-the-2017-stock-assessment.pdf/)
-	b) [petrale sole 2011](https://www.pcouncil.org/documents/2009/11/2009-petrale-sole-rebuilding-analysis-november-2-2009.pdf/)
+	a) [yelloweye rockfish 2017](https://www.pcouncil.org/documents/2017/01/rebuilding-analysis-for-yelloweye-rockfish-sebastes-ruberrimus-based-on-the-2017-stock-assessment.pdf/)
+	b) [petrale sole 2011](https://www.pcouncil.org/documents/2011/11/2011-petrale-sole-rebuilding-analysis-november-23-2011.pdf/)
 2. New rebuilding analysis: 
-	a) [quillback rockfish](https://www.pcouncil.org/documents/2022/01/draft-rebuilding-analysis-for-quillback-rockfish-sebastes-maliger-in-u-s-waters-off-the-coast-of-california-based-on-the-2021-stock-assessment-incorporating-november-2021-council-meeting-requests.pdf/)
-	b) [petrale sole 2009](https://www.pcouncil.org/documents/2011/11/2011-petrale-sole-rebuilding-analysis-november-23-2011.pdf/)
+	a) [quillback rockfish 2021](https://www.pcouncil.org/documents/2022/01/draft-rebuilding-analysis-for-quillback-rockfish-sebastes-maliger-in-u-s-waters-off-the-coast-of-california-based-on-the-2021-stock-assessment-incorporating-november-2021-council-meeting-requests.pdf/)
+	b) [Pacific sardine 2020](https://repository.library.noaa.gov/view/noaa/29970)
+	b) [petrale sole 2009](https://www.pcouncil.org/documents/2009/11/2009-petrale-sole-rebuilding-analysis-november-2-2009.pdf/)
 	
 ## Scientific publications
 
