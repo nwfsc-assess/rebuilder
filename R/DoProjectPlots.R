@@ -422,7 +422,10 @@ DoProjectPlots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles = 
   # =============================================================================================================
 
   IndividualPlots <- function(UUU, Title, yearmax) {
-    # this function makes plots of confidence intervals of individual trajectories
+    # This function makes plots of confidence intervals of individual trajectories for the strategy
+    # specified in the Rebuild.dat file ("Which probability to produce detailed outputs for")
+    # Lines are at the 5th and 95th percentile (light gray), 25th and 75th percentile (dark gray), 
+    # and 50th percentile (solid line)
     par(mfrow = c(OutlineMulti[1], OutlineMulti[2]))
 
     Ipnt <- which(UUU == "#Individual") + 2
@@ -451,11 +454,13 @@ DoProjectPlots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles = 
         ind[["sb"]][["B0"]] <- B0 / BioScalar
         abline(h = 0.4 * B0 / BioScalar, lwd = 1, lty = 2)
         abline(h = 0.25 * B0 / BioScalar, lwd = 1, lty = 2)
-        message("Making spawning biomass plot for run ", ii)
       }
 
       if (ii == AllInd[1]) title(Title)
     }
+    detPolicy <- as.numeric(UUU$X1[9]) #Policy desired for detailed output
+    message("Individual plots for harvest strategy ", UUU[which(UUU == "#Summary_1")+2, detPolicy+2])
+    
     # return values used in figures
     return(ind)
   }
@@ -491,6 +496,8 @@ DoProjectPlots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles = 
   #  ==================================================================================================
 
   FirstFive <- function(UUU, Title, yearmax) {
+    # This function plots trajectories of the first five simulations from the strategy specified
+    # in the Rebuild.dat file ("Which probability to produce detailed outputs for")
     par(mfrow = c(Outlines[1], Outlines[2]))
 
     Ipnt <- which(UUU == "#Individual") + 2
@@ -519,11 +526,19 @@ DoProjectPlots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles = 
       lines(Xvals, Yvals[Use], lty = II)
     }
     title(Title)
+    
+    detPolicy <- as.numeric(UUU$X1[9]) #Policy desired for detailed output
+    message("First five trajectories for harvest strategy ", UUU[which(UUU == "#Summary_1")+2, detPolicy+2])
+    
   }
 
   #  ==================================================================================================
 
   FinalRecovery <- function(UUU, Title) {
+    # This function plots a histogram of the time to first reach recovery for each simulation from the 
+    # strategy specified in the Rebuild.dat file ("Which probability to produce detailed outputs for")
+    # along with a dashed vertical line indicating Tmax. 
+    
     par(mfrow = c(Outlines[1], Outlines[2]))
 
     Ipnt <- which(UUU == "#Final_Recovery") + 2
@@ -542,9 +557,13 @@ DoProjectPlots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles = 
       yy <- c(0, Yvals[II], Yvals[II], 0)
       polygon(xx, yy, col = "gray")
     }
-    Yvals <- as.double(UUU[Ipnt:(Ipnt + Npnt - 1), 6]) * ymax * 1.2
-    lines(Xvals, Yvals, lty = 1, lwd = 5, col = "red")
+    Yvals <- match(1, as.double(UUU[Ipnt:(Ipnt + Npnt - 1), 6]))
+    abline(v = Yvals + Inc, lty = 2, lwd = 3, col = "black")
     title(Title)
+    
+    detPolicy <- as.numeric(UUU$X1[9]) #Policy desired for detailed output
+    message("Recovery for harvest strategy ", UUU[which(UUU == "#Summary_1")+2, detPolicy+2])
+    
   }
   #  ==================================================================================================
   # make empty list
