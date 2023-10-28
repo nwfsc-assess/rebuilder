@@ -538,8 +538,14 @@ DoProjectPlots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles = 
     # This function plots a histogram of the time to first reach recovery for each simulation from the 
     # strategy specified in the Rebuild.dat file ("Which probability to produce detailed outputs for")
     # along with a dashed vertical line indicating Tmax. 
+    #
+    # In addition this function plots the probability for each year that the target was reached 
+    # (red line, i.e. cumulative distribution of the histogram) and the probability for 
+    # each year that the spawning output is above the target (blue line). These are scaled to one and 
+    # plotted on the secondary axis. The difference between the red and blue lines is the percentage 
+    # of simulations that drop below the target once it has been reached.
     
-    par(mfrow = c(Outlines[1], Outlines[2]))
+    par(mfrow = c(Outlines[1], Outlines[2]), mar = c(5, 4, 4, 4) + 0.3)
 
     Ipnt <- which(UUU == "#Final_Recovery") + 2
     Npnt <- as.double(UUU[Ipnt - 1, 1])
@@ -560,6 +566,16 @@ DoProjectPlots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles = 
     Yvals <- match(1, as.double(UUU[Ipnt:(Ipnt + Npnt - 1), 6]))
     abline(v = Yvals + Inc, lty = 2, lwd = 3, col = "black")
     title(Title)
+    
+    Yvals_first <- as.double(UUU[Ipnt:(Ipnt + Npnt - 1), 4])
+    first_max <- max(Yvals_cum)
+    Yvals_current <- as.double(UUU[Ipnt:(Ipnt + Npnt - 1), 5])
+    par(new = TRUE)
+    plot(Xvals, Yvals_cum / cum_max, type = "l", lty = 1, lwd = 5, col = "red", 
+         axes = FALSE, bty = "n", xlab = "", ylab = "")
+    lines(Xvals, Yvals_current / first_max, lty = 1, lwd = 5, col = 4)
+    axis(side = 4)
+    mtext("Cumulative Probability", side = 4, line = 3)
     
     detPolicy <- as.numeric(UUU$X1[9]) #Policy desired for detailed output
     message("Recovery for harvest strategy ", UUU[which(UUU == "#Summary_1")+2, detPolicy+2])
