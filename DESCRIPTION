@@ -2,7 +2,7 @@ Package: rebuilder
 Type: Package
 Title: Examples and helper functions for conducting rebuilding analysis for West Coast species.
 Version: 1.0
-Author: Chantel Wetzel
+Author: Chantel Wetzel, Brian Langseth
 Maintainer: Chantel Wetzel <chantel.wetzel@noaa.gov>
 Description: Examples and helper functions for conducting rebuilding analysis for West Coast species.
 URL: https://github.com/pfmc-assessments/rebuilder
