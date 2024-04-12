@@ -35,9 +35,10 @@
 #' Default="default".
 #' @param pdf Option to send figures to pdf file instead of plot window in
 #' Rgui. Default=FALSE.
-#' @template pwidth
-#' @template pheight
-#' @template lwd
+#' @param pwidth Default width of plots printed to files in units of
+#' `punits`.
+#' @param pheight Height of plots printed to png files in units of `punits`.
+#' @param lwd Line width for plot elements.
 #' @author Andre Punt, Ian Taylor
 #' @export
 #' @examples

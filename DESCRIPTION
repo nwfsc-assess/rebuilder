@@ -4,7 +4,7 @@ Title: Examples and helper functions for conducting rebuilding analysis for West
 Version: 1.0
 Author: Chantel Wetzel
 Maintainer: Chantel Wetzel <chantel.wetzel@noaa.gov>
-Description:  Examples and helper functions for conducting rebuilding analysis for West Coast species.
+Description: Examples and helper functions for conducting rebuilding analysis for West Coast species.
 URL: https://github.com/pfmc-assessments/rebuilder
 BugReports: https://github.com/pfmc-assessments/rebuilder/issues
 LazyData: true
@@ -15,6 +15,6 @@ Imports:
 	reshape2
 Suggests:
 License: GPL-3
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
