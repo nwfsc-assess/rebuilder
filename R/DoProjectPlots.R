@@ -130,6 +130,10 @@ DoProjectPlots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles = 
   }
   #  ==================================================================================================
 
+  #This figure comes from x and y values that rebuilder outputs into res.csv. Sometimes the x range that rebuilder 
+  #outputs doesn't cover the full range of values for B0, thus the histogram is bunched up at the margins. 
+  #This would need to confirmed and corrected within the fortran rebuilder code. I have not done that.
+  #In the meantime, beware that the histogram may look off because its bunched up.  
   B0Dist <- function(UUU, Title) {
     par(mfrow = c(Outlines[1], Outlines[2]))
 
@@ -414,7 +418,7 @@ DoProjectPlots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles = 
       col2 <- c(col2, ColorsUsed[IlineType])
     }
 
-    legend(LegLoc, legend = legs, lty = Ltys, cex = 1, col = col2, lwd = lwd)
+    legend(LegLoc, legend = legs, lty = Ltys, cex = 1, col = col2, lwd = lwd, bty = "n")
     for (i in 1:4) if (!is.null(AltStrat.output[[i]])) names(AltStrat.output[[i]])[-1] <- legs
 
     return(AltStrat.output)
@@ -425,7 +429,8 @@ DoProjectPlots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles = 
     # This function makes plots of confidence intervals of individual trajectories for the strategy
     # specified in the Rebuild.dat file ("Which probability to produce detailed outputs for")
     # Lines are at the 5th and 95th percentile (light gray), 25th and 75th percentile (dark gray), 
-    # and 50th percentile (solid line)
+    # and 50th percentile (solid line).
+    # Horizontal dashed lines on Spawning Biomass plot are 40 and 25 percent of unfished biomass
     par(mfrow = c(OutlineMulti[1], OutlineMulti[2]))
 
     Ipnt <- which(UUU == "#Individual") + 2
@@ -537,7 +542,7 @@ DoProjectPlots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles = 
   FinalRecovery <- function(UUU, Title) {
     # This function plots a histogram of the time to first reach recovery for each simulation from the 
     # strategy specified in the Rebuild.dat file ("Which probability to produce detailed outputs for")
-    # along with a dashed vertical line indicating Tmax. 
+    # along with a dashed vertical line indicating Tmax. The histogram is scaled so the values sum to 1
     #
     # In addition this function plots the probability for each year that the target was reached 
     # (red line, i.e. cumulative distribution of the histogram) and the probability for 
@@ -554,26 +559,27 @@ DoProjectPlots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles = 
     Xvals <- as.double(UUU[Ipnt:(Ipnt + Npnt - 1), 1])
     Yvals <- as.double(UUU[Ipnt:(Ipnt + Npnt - 1), 3])
     ymax <- max(Yvals)
-    plot(Xvals, Yvals, xlab = "Year", ylab = "Proportion of Simulations", type = "n", yaxs = "i", ylim = c(0, 1.4 * ymax))
+    plot(Xvals, Yvals, xlab = "Year", ylab = "Proportion of Simulations", type = "n", yaxs = "i", ylim = c(0, 1.4 * ymax/sum(Yvals)))
 
     Inc <- (Xvals[2] - Xvals[1]) / 2
     for (II in 1:Npnt)
     {
       xx <- c(Xvals[II] - Inc, Xvals[II] - Inc, Xvals[II] + Inc, Xvals[II] + Inc)
-      yy <- c(0, Yvals[II], Yvals[II], 0)
+      yy <- c(0, Yvals[II]/sum(Yvals), Yvals[II]/sum(Yvals), 0)
       polygon(xx, yy, col = "gray")
     }
-    Yvals <- match(1, as.double(UUU[Ipnt:(Ipnt + Npnt - 1), 6]))
-    abline(v = Yvals + Inc, lty = 2, lwd = 3, col = "black")
+    tmax <- as.double(UUU[which(UUU == "#Recovery_Spec")+2,1])
+    abline(v = tmax, lty = 2, lwd = 3, col = "black")
     title(Title)
     
     Yvals_first <- as.double(UUU[Ipnt:(Ipnt + Npnt - 1), 4])
-    first_max <- max(Yvals_cum)
+    first_max <- max(Yvals_first)
     Yvals_current <- as.double(UUU[Ipnt:(Ipnt + Npnt - 1), 5])
+    current_max <- max(Yvals_current)
     par(new = TRUE)
-    plot(Xvals, Yvals_cum / cum_max, type = "l", lty = 1, lwd = 5, col = "red", 
-         axes = FALSE, bty = "n", xlab = "", ylab = "")
-    lines(Xvals, Yvals_current / first_max, lty = 1, lwd = 5, col = 4)
+    plot(Xvals, Yvals_first / first_max, type = "l", lty = 1, lwd = 5, col = "red", 
+         axes = FALSE, bty = "n", xlab = "", ylab = "", yaxs = "i")
+    lines(Xvals, Yvals_current / current_max, lty = 1, lwd = 5, col = 4)
     axis(side = 4)
     mtext("Cumulative Probability", side = 4, line = 3)
     
@@ -583,7 +589,7 @@ DoProjectPlots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles = 
   }
   #  ==================================================================================================
   # make empty list
-  UUUs <- vector("list", 5)
+  UUUs <- vector("list", 5) #<- This may throw an error if length of dirn is greater than one
   # number of files to read
   Nfiles <- length(fileN)
   # if only 1 directory was input, repeat for each file
