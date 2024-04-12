@@ -551,6 +551,7 @@ DoProjectPlots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles = 
     # of simulations that drop below the target once it has been reached.
     
     par(mfrow = c(Outlines[1], Outlines[2]), mar = c(5, 4, 4, 4) + 0.3)
+    orig_cex = par("cex")
 
     Ipnt <- which(UUU == "#Final_Recovery") + 2
     Npnt <- as.double(UUU[Ipnt - 1, 1])
@@ -581,10 +582,13 @@ DoProjectPlots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles = 
          axes = FALSE, bty = "n", xlab = "", ylab = "", yaxs = "i")
     lines(Xvals, Yvals_current / current_max, lty = 1, lwd = 5, col = 4)
     axis(side = 4)
-    mtext("Cumulative Probability", side = 4, line = 3)
+    mtext("Cumulative Probability", side = 4, line = 3, cex = orig_cex)
+
+    legend("right", c("Tmax", "Prob has recovered", "Prob is recovered"), lty = c(2, 1, 1),
+           col = c(1, "red", 4), bty = "n", lwd = lwd, cex = 0.75 * orig_cex * orig_cex)
     
     detPolicy <- as.numeric(UUU$X1[9]) #Policy desired for detailed output
-    message("Recovery for harvest strategy ", UUU[which(UUU == "#Summary_1")+2, detPolicy+2])
+    message("Recovery for harvest strategy ", UUU[which(UUU == "#Summary_1") + 2, detPolicy + 2])
     
   }
   #  ==================================================================================================
