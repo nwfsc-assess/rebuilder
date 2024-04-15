@@ -38,15 +38,13 @@
 #' @param pwidth Default width of plots printed to files in units of
 #' `punits`.
 #' @param pheight Height of plots printed to png files in units of `punits`.
-#' Default is designed to allow two plots per page, with `pheight_tall` used
-#' for plots that work best with a taller format and a single plot per page.
 #' @param lwd Line width for plot elements.
-#' @author Andre Punt, Ian Taylor, Chantel Wetzel
+#' @author Andre Punt, Ian Taylor
 #' @export
 #' @examples
 #' \dontrun{
 #' # example with one file
-#' do_project_plots(
+#' DoProjectPlots(
 #'   dirn = "c:/myfiles/", Plots = 1:8,
 #'   Options = c(1, 2, 3, 4, 5, 9), LegLoc = "bottomleft"
 #' )
@@ -58,7 +56,7 @@
 #' Titles <- c("Res1", "Res2", "Res3")
 #' Plots <- list(c(1:9), c(6:7))
 #' Options <- list(c(7:9, 3), c(5, 7))
-#' do_project_plots(
+#' DoProjectPlots(
 #'   fileN = c("res1.csv", "res2.csv"), Titles = Titles, Plots = Plots,
 #'   Options = Options, LegLoc = "bottomleft", yearmax = -1,
 #'   Outlines = c(2, 2), OutlineMulti = c(3, 3), AllTraj = c(1:4),
@@ -69,7 +67,7 @@
 #' )
 #' }
 #'
-do_project_plots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles = "", ncols = 200,
+DoProjectPlots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles = "", ncols = 200,
                            Plots = list(1:25), Options = list(c(1:9)), LegLoc = "bottomright",
                            yearmax = -1, Outlines = c(2, 2), OutlineMulti = c(2, 2),
                            AllTraj = c(1, 2, 3, 4), AllInd = c(1, 2, 3, 4, 5, 6, 7),
@@ -81,7 +79,6 @@ do_project_plots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles 
     pdf(file = pdffile, width = pwidth, height = pheight)
     message("Name of PDF file with plots: ", pdffile)
   } else {
-
     ### Note: the following line has been commented out because it was identified
     ###       by Brian Ripley as "against CRAN policies".
     # if(exists(".SavedPlots",where=1)) rm(.SavedPlots,pos=1)
@@ -134,6 +131,10 @@ do_project_plots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles 
   }
   #  ==================================================================================================
 
+  #This figure comes from x and y values that rebuilder outputs into res.csv. Sometimes the x range that rebuilder 
+  #outputs doesn't cover the full range of values for B0, thus the histogram is bunched up at the margins. 
+  #This would need to confirmed and corrected within the fortran rebuilder code. I have not done that.
+  #In the meantime, beware that the histogram may look off because its bunched up.  
   B0Dist <- function(UUU, Title) {
     par(mfrow = c(Outlines[1], Outlines[2]))
 
@@ -209,7 +210,7 @@ do_project_plots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles 
     }
 
     NOpts <- 0
-    for (Ifile in 1:length(FileN)) NOpts <- NOpts + length(Options[[Ifile]])
+    for (Ifile in seq_along(FileN)) NOpts <- NOpts + length(Options[[Ifile]])
 
     if (NOpts > 8) {
       warning(
@@ -221,7 +222,7 @@ do_project_plots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles 
     Files <- NULL
     Opts <- NULL
     LastCatch <- NULL
-    for (Ifile in 1:length(FileN)) {
+    for (Ifile in seq_along(FileN)) {
       for (II in Options[[Ifile]])
       {
         Files <- c(Files, Ifile)
@@ -242,7 +243,7 @@ do_project_plots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles 
     # get the x-axis right
     xmin <- 1.0e20
     xmax <- 0
-    for (Ifile in 1:length(FileN))
+    for (Ifile in seq_along(FileN))
     {
       Ipnt <- which(UUUs[[Ifile]] == "#Summary_1") + 3
       Npnt <- as.double(UUUs[[Ifile]][Ipnt - 2, 1])
@@ -295,7 +296,7 @@ do_project_plots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles 
 
       if (ii == 2) {
         ymax <- 0
-        for (Ifile in 1:length(FileN)) {
+        for (Ifile in seq_along(FileN)) {
           for (II in Options[[Ifile]])
           {
             Ipnt <- which(UUUs[[Ifile]] == "#Summary_1") + 3
@@ -325,7 +326,7 @@ do_project_plots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles 
 
       if (ii == 3) {
         ymax <- 0
-        for (Ifile in 1:length(FileN)) {
+        for (Ifile in seq_along(FileN)) {
           for (II in Options[[Ifile]])
           {
             Ipnt <- which(UUUs[[Ifile]] == "#Summary_1") + 3
@@ -355,7 +356,7 @@ do_project_plots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles 
 
       if (ii == 4) {
         ymax <- 0
-        for (Ifile in 1:length(FileN)) {
+        for (Ifile in seq_along(FileN)) {
           for (II in Options[[Ifile]])
           {
             Ipnt <- which(UUUs[[Ifile]] == "#Summary_1") + 3
@@ -418,7 +419,7 @@ do_project_plots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles 
       col2 <- c(col2, ColorsUsed[IlineType])
     }
 
-    legend(LegLoc, legend = legs, lty = Ltys, cex = 1, col = col2, lwd = lwd)
+    legend(LegLoc, legend = legs, lty = Ltys, cex = 1, col = col2, lwd = lwd, bty = "n")
     for (i in 1:4) if (!is.null(AltStrat.output[[i]])) names(AltStrat.output[[i]])[-1] <- legs
 
     return(AltStrat.output)
@@ -426,7 +427,11 @@ do_project_plots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles 
   # =============================================================================================================
 
   IndividualPlots <- function(UUU, Title, yearmax) {
-    # this function makes plots of confidence intervals of individual trajectories
+    # This function makes plots of confidence intervals of individual trajectories for the strategy
+    # specified in the Rebuild.dat file ("Which probability to produce detailed outputs for")
+    # Lines are at the 5th and 95th percentile (light gray), 25th and 75th percentile (dark gray), 
+    # and 50th percentile (solid line).
+    # Horizontal dashed lines on Spawning Biomass plot are 40 and 25 percent of unfished biomass
     par(mfrow = c(OutlineMulti[1], OutlineMulti[2]))
 
     Ipnt <- which(UUU == "#Individual") + 2
@@ -455,11 +460,13 @@ do_project_plots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles 
         ind[["sb"]][["B0"]] <- B0 / BioScalar
         abline(h = 0.4 * B0 / BioScalar, lwd = 1, lty = 2)
         abline(h = 0.25 * B0 / BioScalar, lwd = 1, lty = 2)
-        message("Making spawning biomass plot for run ", ii)
       }
 
       if (ii == AllInd[1]) title(Title)
     }
+    detPolicy <- as.numeric(UUU$X1[9]) #Policy desired for detailed output
+    message("Individual plots for harvest strategy ", UUU[which(UUU == "#Summary_1")+2, detPolicy+2])
+    
     # return values used in figures
     return(ind)
   }
@@ -495,6 +502,8 @@ do_project_plots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles 
   #  ==================================================================================================
 
   FirstFive <- function(UUU, Title, yearmax) {
+    # This function plots trajectories of the first five simulations from the strategy specified
+    # in the Rebuild.dat file ("Which probability to produce detailed outputs for")
     par(mfrow = c(Outlines[1], Outlines[2]))
 
     Ipnt <- which(UUU == "#Individual") + 2
@@ -523,12 +532,27 @@ do_project_plots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles 
       lines(Xvals, Yvals[Use], lty = II)
     }
     title(Title)
+    
+    detPolicy <- as.numeric(UUU$X1[9]) #Policy desired for detailed output
+    message("First five trajectories for harvest strategy ", UUU[which(UUU == "#Summary_1")+2, detPolicy+2])
+    
   }
 
   #  ==================================================================================================
 
   FinalRecovery <- function(UUU, Title) {
-    par(mfrow = c(Outlines[1], Outlines[2]))
+    # This function plots a histogram of the time to first reach recovery for each simulation from the 
+    # strategy specified in the Rebuild.dat file ("Which probability to produce detailed outputs for")
+    # along with a dashed vertical line indicating Tmax. The histogram is scaled so the values sum to 1
+    #
+    # In addition this function plots the probability for each year that the target was reached 
+    # (red line, i.e. cumulative distribution of the histogram) and the probability for 
+    # each year that the spawning output is above the target (blue line). These are scaled to one and 
+    # plotted on the secondary axis. The difference between the red and blue lines is the percentage 
+    # of simulations that drop below the target once it has been reached.
+    
+    par(mfrow = c(Outlines[1], Outlines[2]), mar = c(5, 4, 4, 4) + 0.3)
+    orig_cex = par("cex")
 
     Ipnt <- which(UUU == "#Final_Recovery") + 2
     Npnt <- as.double(UUU[Ipnt - 1, 1])
@@ -537,22 +561,40 @@ do_project_plots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles 
     Xvals <- as.double(UUU[Ipnt:(Ipnt + Npnt - 1), 1])
     Yvals <- as.double(UUU[Ipnt:(Ipnt + Npnt - 1), 3])
     ymax <- max(Yvals)
-    plot(Xvals, Yvals, xlab = "Year", ylab = "Proportion of Simulations", type = "n", yaxs = "i", ylim = c(0, 1.4 * ymax))
+    plot(Xvals, Yvals, xlab = "Year", ylab = "Proportion of Simulations", type = "n", yaxs = "i", ylim = c(0, 1.4 * ymax/sum(Yvals)))
 
     Inc <- (Xvals[2] - Xvals[1]) / 2
     for (II in 1:Npnt)
     {
       xx <- c(Xvals[II] - Inc, Xvals[II] - Inc, Xvals[II] + Inc, Xvals[II] + Inc)
-      yy <- c(0, Yvals[II], Yvals[II], 0)
+      yy <- c(0, Yvals[II]/sum(Yvals), Yvals[II]/sum(Yvals), 0)
       polygon(xx, yy, col = "gray")
     }
-    Yvals <- as.double(UUU[Ipnt:(Ipnt + Npnt - 1), 6]) * ymax * 1.2
-    lines(Xvals, Yvals, lty = 1, lwd = 5, col = "red")
+    tmax <- as.double(UUU[which(UUU == "#Recovery_Spec")+2,1])
+    abline(v = tmax, lty = 2, lwd = 3, col = "black")
     title(Title)
+    
+    Yvals_first <- as.double(UUU[Ipnt:(Ipnt + Npnt - 1), 4])
+    first_max <- max(Yvals_first)
+    Yvals_current <- as.double(UUU[Ipnt:(Ipnt + Npnt - 1), 5])
+    current_max <- max(Yvals_current)
+    par(new = TRUE)
+    plot(Xvals, Yvals_first / first_max, type = "l", lty = 1, lwd = 5, col = "red", 
+         axes = FALSE, bty = "n", xlab = "", ylab = "", yaxs = "i")
+    lines(Xvals, Yvals_current / current_max, lty = 1, lwd = 5, col = 4)
+    axis(side = 4)
+    mtext("Cumulative Probability", side = 4, line = 3, cex = orig_cex)
+
+    legend("right", c("Tmax", "Prob has recovered", "Prob is recovered"), lty = c(2, 1, 1),
+           col = c(1, "red", 4), bty = "n", lwd = lwd, cex = 0.75 * orig_cex * orig_cex)
+    
+    detPolicy <- as.numeric(UUU$X1[9]) #Policy desired for detailed output
+    message("Recovery for harvest strategy ", UUU[which(UUU == "#Summary_1") + 2, detPolicy + 2])
+    
   }
   #  ==================================================================================================
   # make empty list
-  UUUs <- vector("list", 5)
+  UUUs <- vector("list", 5) #<- This may throw an error if length of dirn is greater than one
   # number of files to read
   Nfiles <- length(fileN)
   # if only 1 directory was input, repeat for each file
@@ -625,3 +667,15 @@ do_project_plots <- function(dirn = "C:/myfiles/", fileN = c("res.csv"), Titles 
   OutputList[["ind.list"]] <- ind.list
   return(invisible(OutputList))
 }
+
+# ================================================================================================================
+
+
+## # Plots - set to get specific plots
+## # Options - set to get specific strategies in the trajectory plots
+
+## Titles <- c("Res1","Res2","Res3")
+## Plots <- list(c(1:9),c(6:7))
+## Options = list(c(7:9,3),c(5,7))
+## DoProjectPlots(fileN=c("res1.csv","res2.csv"),Titles=Titles,Plots=Plots,Options=Options,LegLoc="bottomleft",yearmax=-1,Outlines=c(2,2),OutlineMulti=c(3,3),AllTraj=c(1:4),AllInd=c(1:7),
+##                BioType="Spawning numbers",BioUnit="(lb)",BioScalar=1000,CatchUnit="(lb)",ColorsUse=rep(c("red","blue"),5),Labels=c("A","B","C","D","E","F"))
